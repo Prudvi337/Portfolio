@@ -39,9 +39,6 @@ git push origin main
 vercel --prod
 ```
 
-## 📄 License
-This project is open-source and available under the MIT License.
-
 ## 📬 Contact
 For inquiries, reach out via:
 - Email: [prudvireddy7733@gmail.com](mailto:prudvireddy7733@gmail.com)
