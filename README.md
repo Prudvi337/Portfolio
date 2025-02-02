@@ -16,7 +16,7 @@ Welcome to my personal portfolio! This project showcases my skills, projects, an
 ## 🛠️ Tech Stack
 - **Frontend:** React.js, Tailwind CSS, Framer Motion
 - **Icons:** Lucide React
-- **Deployment:** Vercel/GitHub Pages (update based on your deployment method)
+- **Deployment:** Vercel
 
 ## 🚀 Installation & Setup
 To run the portfolio locally, follow these steps:
