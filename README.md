@@ -3,7 +3,7 @@
 Welcome to my personal portfolio! This project showcases my skills, projects, and achievements as an AI & Machine Learning Enthusiast and Full Stack Developer.
 
 ## 🌟 Live Demo
-[View Portfolio](https://your-portfolio-url.com)
+[View Portfolio](https://prudvi-kumar-reddy.vercel.app/)
 
 ## 📌 Features
 - ✨ Modern and responsive design
@@ -22,7 +22,7 @@ Welcome to my personal portfolio! This project showcases my skills, projects, an
 To run the portfolio locally, follow these steps:
 
 ```sh
-git clone https://github.com/your-username/portfolio.git
+git clone https://github.com/Prudvi337/Portfolio.git
 cd portfolio
 npm install
 npm run dev  # Starts the development server
