@@ -24,15 +24,15 @@ const About = () => {
             About Me
           </h2>
 
-          <div className="glass p-6 rounded-2xl mb-12">
-            <p className="text-lg leading-relaxed text-muted-foreground">
+          <div className="glass p-6 rounded-2xl mb-12 ">
+          <p className="text-lg leading-relaxed text-muted-foreground flex justify-center items-center text-center">
               I am a passionate Computer Science student specializing in AI, Machine Learning, and Data Science. 
               With a strong foundation in full-stack development and a deep interest in cutting-edge technologies, 
               I strive to create innovative solutions that make a real impact. My journey in tech has been marked 
               by continuous learning and practical application through various internships at prestigious companies 
               like PWC, IBM, TATA, and Accenture.
             </p>
-            <p className="text-lg leading-relaxed text-muted-foreground mt-4">
+            <p className="text-lg leading-relaxed text-muted-foreground mt-4 flex justify-center items-center text-center">
               Currently pursuing my B.Tech in Computer Science & Engineering, I maintain a strong academic record 
               while actively engaging in real-world projects. My experience spans from developing AI-powered 
               healthcare solutions to creating interactive educational platforms, showcasing my versatility and 
