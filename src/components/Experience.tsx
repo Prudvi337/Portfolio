@@ -5,7 +5,7 @@ const Experience = () => {
   const experiences = [
     {
       title: "Full Stack Web Intern",
-      company: "Unifies Mentor",
+      company: "Unified Mentor",
       date: "Feb 15, 2025 – Present",
       description: [
         "Developing and integrating full-stack features using React, Node.js, and Firebase",
