@@ -64,8 +64,8 @@ const Index = () => {
       {/* Resume Download Button */}
       <div className="relative z-20 mt-8">
         <a 
-          href="/resume.pdf" 
-          download="Prudvi Kumar Reddy-Resume.pdf"
+          href="/resume.docx" 
+          download="Prudvi Kumar Reddy-Resume.docx"
           className="px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition-all"
         >
           Download Resume
