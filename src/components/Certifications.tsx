@@ -58,18 +58,18 @@ const CertCard = ({ cert, index }) => {
 
   const handleMouseMove = (e) => {
     if (!mounted) return;
-    
+
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    
+
     const rotateX = (y - centerY) / 15;
     const rotateY = -(x - centerX) / 15;
-    
+
     setPosition({ x: rotateY, y: rotateX });
   };
 
@@ -80,47 +80,49 @@ const CertCard = ({ cert, index }) => {
 
   return (
     <div
-      className={`group relative transform transition-all duration-300 ${isHovered ? "scale-105 z-10" : "scale-100 z-0"}`}
-      style={{ 
+      className={`group relative transform transition-all duration-300 ${isHovered ? "scale-105 z-20" : "scale-100 z-10"}`}
+      style={{
         perspective: "1000px",
-        transitionDelay: `${index * 50}ms` 
+        transitionDelay: `${index * 50}ms`,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={resetPosition}
       onMouseMove={handleMouseMove}
     >
-      <div 
-        className="bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 backdrop-blur-md rounded-xl p-0.5 shadow-lg relative overflow-hidden"
+      <div
+        className="bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 backdrop-blur-md rounded-xl p-0.5 shadow-lg relative overflow-visible"
         style={{
           transform: `rotateX(${position.y}deg) rotateY(${position.x}deg)`,
-          transition: isHovered ? "transform 0.2s ease-out" : "transform 0.5s ease-out"
+          transition: isHovered ? "transform 0.2s ease-out" : "transform 0.5s ease-out",
         }}
       >
         <div className="bg-black/50 backdrop-blur-xl rounded-lg p-6 h-full relative">
           {/* Animated background gradient */}
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
-          
+
           {/* Floating emoji icon */}
-          <div 
+          <div
             className="absolute right-4 top-4 text-2xl transition-all duration-500 animate-pulse"
             style={{
-              animationDuration: `${3 + (index % 3)}s`
+              animationDuration: `${3 + (index % 3)}s`,
             }}
           >
             {cert.icon}
           </div>
-          
+
           <div className="flex items-start gap-3">
             <div className="p-3 bg-blue-500/10 rounded-xl transition-all duration-300 group-hover:bg-blue-500/20 group-hover:shadow-lg">
               <AwardIcon className="w-6 h-6 text-blue-400 group-hover:text-blue-300 transition-colors duration-300" />
             </div>
-            
+
             <div className="space-y-1">
-              <h3 className="font-bold text-lg text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300">{cert.name}</h3>
+              <h3 className="font-bold text-lg text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300">
+                {cert.name}
+              </h3>
               <p className="text-gray-400 text-sm">{cert.academy}</p>
             </div>
           </div>
-          
+
           <a
             href={cert.link}
             target="_blank"
@@ -130,13 +132,13 @@ const CertCard = ({ cert, index }) => {
           >
             <ExternalLink className="w-5 h-5" />
           </a>
-          
+
           {/* Particle effect on hover */}
           {isHovered && (
             <div className="absolute inset-0 pointer-events-none">
-              <Sparkles className="absolute animate-ping text-blue-300 w-3 h-3" style={{ top: '20%', left: '80%', animationDuration: '1s' }} />
-              <Sparkles className="absolute animate-ping text-purple-300 w-3 h-3" style={{ top: '70%', left: '30%', animationDuration: '1.5s' }} />
-              <Sparkles className="absolute animate-ping text-pink-300 w-3 h-3" style={{ top: '40%', left: '60%', animationDuration: '2s' }} />
+              <Sparkles className="absolute animate-ping text-blue-300 w-3 h-3" style={{ top: "20%", left: "80%", animationDuration: "1s" }} />
+              <Sparkles className="absolute animate-ping text-purple-300 w-3 h-3" style={{ top: "70%", left: "30%", animationDuration: "1.5s" }} />
+              <Sparkles className="absolute animate-ping text-pink-300 w-3 h-3" style={{ top: "40%", left: "60%", animationDuration: "2s" }} />
             </div>
           )}
         </div>
