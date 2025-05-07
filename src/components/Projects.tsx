@@ -54,7 +54,7 @@ const Projects = () => {
     {
       title: "Portfolio Website",
       description: "Designed and developed a personal portfolio website to showcase projects and skills.",
-      image: "/portfolio.png",
+      image: "/favicon.png",
       tags: ["React.js", "Tailwind CSS", "Framer Motion"],
       github: "https://github.com/Prudvi337/Portfolio",
       live: "https://prudvi-kumar-reddy.vercel.app/"
@@ -266,24 +266,40 @@ const Projects = () => {
         
         {/* CTA Section */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-20 text-center"
-        >
-          <p className="text-muted-foreground mb-4">Interested in working together?</p>
-          <Button 
-            size="lg" 
-            className="bg-gradient-to-r from-primary to-purple-500 hover:opacity-90 transition-opacity"
-            asChild
-          >
-            <a href="#contact">Contact Me</a>
-          </Button>
-        </motion.div>
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6 }}
+  className="mt-20 text-center space-y-6"
+>
+  {/* Inspirational Quote */}
+  <motion.blockquote 
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.3, duration: 0.8 }}
+    className="max-w-3xl mx-auto text-lg md:text-2xl font-semibold text-gray-300 leading-relaxed"
+  >
+    <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-500 bg-clip-text text-transparent">
+      “Innovation is not just about <span className="italic">creating new things</span>,
+      but about <span className="italic">making a difference</span> in the way we experience the world.”
+    </span>
+  </motion.blockquote>
+
+  {/* Sub Text */}
+  <p className="text-muted-foreground text-sm md:text-base">Interested in working together?</p>
+
+  {/* Contact Button */}
+  <Button 
+    size="lg" 
+    className="bg-gradient-to-r from-primary to-purple-500 hover:opacity-90 transition-opacity shadow-lg shadow-purple-500/20"
+    asChild
+  >
+    <a href="#contact">Contact Me</a>
+  </Button>
+</motion.div>
+
       </div>
     </section>
   );
-};
-
+}
 export default Projects;

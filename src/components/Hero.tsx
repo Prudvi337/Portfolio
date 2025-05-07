@@ -29,9 +29,6 @@ const Index = () => {
     document.title = "Prudvi Kumar Reddy";
   }, []);
 
-  // Hide floating tags on mobile
-  const isMobile = window.innerWidth <= 768;
-
   return (
     <div className="min-h-screen bg-black relative overflow-hidden flex flex-col items-center justify-center">
       {/* Black Background */}
@@ -43,29 +40,22 @@ const Index = () => {
           I'M Prudvi Kumar Reddy
         </h1>
 
-        {/* Mobile Only Subtitle */}
-        <p className="text-lg text-blue-200 md:hidden">
+        {/* Subtitle visible on all devices */}
+        <p className="text-lg text-blue-200">
           AI-ML Enthusiast | Full Stack Developer
-        </p>
-        
-        {/* Small Note for Mobile Users */}
-        <p className="text-sm text-gray-400 mt-1 md:hidden">
-          Check the desktop version for the full experience.
         </p>
       </div>
 
-      {/* Free Floating Tags (Only for Desktop) */}
-      {!isMobile && (
-        <div className="absolute inset-0 z-10 hidden md:block">
-          <FloatingTags tags={tags} />
-        </div>
-      )}
+      {/* Floating Tags - now shown on all screen sizes */}
+      <div className="absolute inset-0 z-10">
+        <FloatingTags tags={tags} />
+      </div>
 
       {/* Resume Download Button */}
       <div className="relative z-20 mt-8">
         <a 
-          href="/Prudvi Kumar Reddy-Resume.docx" 
-          download="Prudvi Kumar Reddy-Resume.docx"
+          href="/Prudvi Kumar Reddy-Resume.pdf" 
+          download="Prudvi Kumar Reddy-Resume.pdf"
           className="px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition-all"
         >
           Download Resume
