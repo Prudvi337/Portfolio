@@ -44,7 +44,7 @@ const Navbar = () => {
             <motion.div whileHover={{ scale: 1.05 }} className="mx-2">
               <a href="#">
                 <img
-                  src="/logo.jpg"
+                  src="/logo.png"
                   alt="Logo"
                   className="h-12 w-auto object-contain"
                 />

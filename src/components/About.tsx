@@ -47,7 +47,7 @@ const About = () => {
                 <div>
                   <h4 className="text-lg font-medium text-primary">B.Tech in Computer Science & Engineering</h4>
                   <p className="text-muted-foreground">Nalla Malla Reddy Engineering College</p>
-                  <p className="text-sm text-muted-foreground">2021 - 2025 | GPA: 8.67</p>
+                  <p className="text-sm text-muted-foreground">2021 - 2025 | GPA: 8.3</p>
                 </div>
                 <div>
                   <h4 className="text-lg font-medium text-primary">Senior Secondary (XII)</h4>

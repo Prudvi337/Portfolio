@@ -54,7 +54,7 @@ const Projects = () => {
     {
       title: "Portfolio Website",
       description: "Designed and developed a personal portfolio website to showcase projects and skills.",
-      image: "/favicon.png",
+      image: "/icon.png",
       tags: ["React.js", "Tailwind CSS", "Framer Motion"],
       github: "https://github.com/Prudvi337/Portfolio",
       live: "https://prudvi-kumar-reddy.vercel.app/"
