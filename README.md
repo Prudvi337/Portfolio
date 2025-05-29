@@ -42,5 +42,5 @@ vercel --prod
 ## 📬 Contact
 For inquiries, reach out via:
 - Email: [prudvireddy7733@gmail.com](mailto:prudvireddy7733@gmail.com)
-- LinkedIn: [Prudvi Kumar Reddy](https://www.linkedin.com/in/prudvi-reddy-5679662a5)
+- LinkedIn: [Prudvi Kumar Reddy](https://www.linkedin.com/in/prudvi-kumar-reddy-5679662a5)
 - GitHub: [Prudvi337](https://github.com/Prudvi337)
