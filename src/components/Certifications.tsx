@@ -164,8 +164,7 @@ const FloatingBubble = ({ size, color, delay, duration, position }) => (
 
 const Certifications = () => {
   return (
-    <section id="certifications" className="py-24 relative overflow-hidden">
-      {/* Animated background elements */}
+    <section id="certifications" className="py-24 relative overflow-hidden animate-fade-in">
       <div className="absolute inset-0 overflow-hidden -z-10">
         <FloatingBubble size={200} color="#3b82f6" delay={0} duration={15} position={{ x: 80, y: 20 }} />
         <FloatingBubble size={300} color="#8b5cf6" delay={2} duration={20} position={{ x: 10, y: 60 }} />

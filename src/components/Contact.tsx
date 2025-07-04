@@ -67,7 +67,7 @@ const ContactCard = ({ contact, index }) => {
         {isCopyable && (
           <button
             onClick={handleCopy}
-            className="p-2 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition"
+            className="p-2 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
             aria-label={`Copy ${contact.label}`}
           >
             {isCopied ? (
@@ -98,7 +98,7 @@ const FloatingGlow = ({ size, x, y, colors }) => (
 
 const Contact = () => {
   return (
-    <section id="contact" className="relative py-24 overflow-hidden">
+    <section id="contact" className="relative py-24 overflow-hidden animate-fade-in">
       {/* Animated floating glows */}
       <div className="absolute inset-0 -z-10">
         <FloatingGlow size={300} x={80} y={20} colors="var(--primary), purple" />
@@ -112,7 +112,7 @@ const Contact = () => {
             Get in Touch
           </h2>
           <p className="text-gray-300 max-w-xl mx-auto text-lg animate-fade-in delay-200">
-            Reach out through any of the channels below. Let’s collaborate or just connect!
+            Reach out through any of the channels below. Let's collaborate or just connect!
           </p>
         </div>
 

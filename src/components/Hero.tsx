@@ -29,6 +29,8 @@ const tags = [
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentRole, setCurrentRole] = useState(0);
+  const [typedRole, setTypedRole] = useState("");
+  const [typing, setTyping] = useState(true);
   
   const roles = [
     "AI-ML Enthusiast",
@@ -40,14 +42,36 @@ const Index = () => {
   useEffect(() => {
     document.title = "Prudvi Kumar Reddy";
     setIsLoaded(true);
-    
-    // Rotate roles every 3 seconds
-    const roleInterval = setInterval(() => {
-      setCurrentRole((prev) => (prev + 1) % roles.length);
-    }, 3000);
-
-    return () => clearInterval(roleInterval);
-  }, []);
+    // Typewriter effect for roles
+    let timeout: NodeJS.Timeout;
+    let charIndex = 0;
+    let forward = true;
+    function typeRole() {
+      const role = roles[currentRole];
+      if (forward) {
+        if (charIndex < role.length) {
+          setTypedRole(role.slice(0, charIndex + 1));
+          charIndex++;
+          timeout = setTimeout(typeRole, 60);
+        } else {
+          forward = false;
+          timeout = setTimeout(typeRole, 1200);
+        }
+      } else {
+        if (charIndex > 0) {
+          setTypedRole(role.slice(0, charIndex - 1));
+          charIndex--;
+          timeout = setTimeout(typeRole, 30);
+        } else {
+          forward = true;
+          setCurrentRole((prev) => (prev + 1) % roles.length);
+          timeout = setTimeout(typeRole, 400);
+        }
+      }
+    }
+    typeRole();
+    return () => clearTimeout(timeout);
+  }, [currentRole]);
 
   // Background particles animation
   const backgroundParticles = Array.from({ length: 20 }, (_, i) => (
@@ -161,7 +185,7 @@ const Index = () => {
 
         {/* Main Title with staggered animation */}
         <motion.h1 
-          className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight"
+          className="text-5xl md:text-7xl font-bold text-white mb-2 tracking-tight"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8, duration: 1 }}
@@ -184,32 +208,33 @@ const Index = () => {
           </motion.span>
         </motion.h1>
 
-        {/* Animated Role Subtitle */}
+        {/* Animated Tagline */}
+        <motion.p
+          className="text-lg md:text-2xl text-blue-200 mb-4 font-medium animate-fade-in"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.1, duration: 0.8 }}
+        >
+          Building the future with code, data, and creativity.
+        </motion.p>
+
+        {/* Animated Role Subtitle (Typewriter) */}
         <motion.div 
           className="h-8 mb-8 flex items-center justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
         >
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={currentRole}
-              className="text-xl text-blue-200 font-medium"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
+          <span className="text-xl text-blue-200 font-medium">
+            {typedRole}
+            <motion.span
+              animate={{ opacity: [1, 0] }}
+              transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
+              className="ml-1 text-blue-400"
             >
-              {roles[currentRole]}
-              <motion.span
-                animate={{ opacity: [1, 0] }}
-                transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
-                className="ml-1 text-blue-400"
-              >
-                |
-              </motion.span>
-            </motion.p>
-          </AnimatePresence>
+              |
+            </motion.span>
+          </span>
         </motion.div>
 
         {/* Sparkle decoration */}
@@ -244,33 +269,14 @@ const Index = () => {
         <motion.a
           href="/Prudvi Kumar Reddy-Resume.pdf"
           download="Prudvi Kumar Reddy-Resume.pdf"
-          className="group relative inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-600 rounded-xl shadow-lg overflow-hidden transition-all duration-300"
+          className="group relative inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-600 rounded-xl shadow-lg overflow-hidden transition-all duration-300 border-2 border-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 hover:border-blue-300 hover:shadow-blue-400/60 hover:shadow-2xl"
           whileHover={{ 
             scale: 1.05,
-            boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)"
+            boxShadow: "0 0 24px 4px rgba(59, 130, 246, 0.4)"
           }}
-          whileTap={{ scale: 0.95 }}
         >
-          {/* Button background animation */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-600 opacity-0 group-hover:opacity-100"
-            transition={{ duration: 0.3 }}
-          />
-          
-          <motion.div
-            animate={{ rotate: [0, 360] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          >
-            <Download className="w-5 h-5 relative z-10" />
-          </motion.div>
-          <span className="relative z-10">Download Resume</span>
-          
-          {/* Shine effect */}
-          <motion.div
-            className="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"
-            animate={{ left: ["-100%", "100%"] }}
-            transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-          />
+          <Download className="w-5 h-5 mr-2 animate-bounce" />
+          Download Resume
         </motion.a>
       </motion.div>
 

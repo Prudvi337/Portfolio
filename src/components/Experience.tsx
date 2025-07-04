@@ -12,105 +12,165 @@ import {
   Brain,
   Cloud,
   Sparkles,
-  MapPin
+  MapPin,
+  Zap,
+  Target,
+  Rocket,
+  Globe,
+  Cpu,
+  Network,
+  Shield,
+  ExternalLink
 } from "lucide-react";
 
 const Experience = () => {
   const [activeIndex, setActiveIndex] = useState(null);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('all');
   
   const experiences = [
     {
       title: "Full Stack Web Intern",
       company: "Unified Mentor",
       date: "Feb 15, 2025 – Apr 15, 2025",
-      icon: "web",
+      icon: Code,
+      category: "web",
       color: "#4F46E5",
+      gradient: "from-indigo-500 to-purple-600",
       description: [
         "Developing and integrating full-stack features using React, Node.js, and Firebase",
         "Implementing secure authentication flows and scalable database schemas",
         "Collaborating in Agile sprints to improve user experience and performance"
-      ]
+      ],
+      skills: ["React", "Node.js", "Firebase", "Agile"],
+      impact: "High",
+      logo: "🚀"
     },
     {
       title: "Frontend Developer",
       company: "Freelance/Self-Placed",
       date: "Jan 2024 – Feb 2025",
-      icon: "frontend",
+      icon: Zap,
+      category: "frontend",
       color: "#2563EB",
+      gradient: "from-blue-500 to-cyan-500",
       description: [
         "Built responsive and modular UI components using React.js and Tailwind CSS",
         "Worked closely with clients to translate user requirements into functional interfaces",
         "Optimized performance and deployed projects to cloud platforms for scalability"
-      ]
+      ],
+      skills: ["React.js", "Tailwind CSS", "UI/UX", "Performance"],
+      impact: "Medium",
+      logo: "⚡"
     },
     {
       title: "Power BI Intern",
       company: "PWC",
       date: "Aug 2024",
-      icon: "data",
+      icon: LineChart,
+      category: "data",
       color: "#EC4899",
+      gradient: "from-pink-500 to-rose-500",
       description: [
         "Built high-impact dashboards, enhancing data visualization for strategic decision-making",
         "Identified executive-level gender disparity through analysis, driving policy recommendations"
-      ]
+      ],
+      skills: ["Power BI", "Data Visualization", "Analytics", "Strategy"],
+      impact: "High",
+      logo: "📊"
     },
     {
       title: "AI-ML Intern",
       company: "IBM Skills Build",
       date: "Jun 2024 - Jul 2024",
-      icon: "ai",
+      icon: Brain,
+      category: "ai",
       color: "#06B6D4",
+      gradient: "from-cyan-500 to-blue-500",
       description: [
         "Engineered AI automation workflows with IBM Watson, boosting operational efficiency",
         "Optimized cloud deployment for scalability, improving service reliability"
-      ]
+      ],
+      skills: ["IBM Watson", "AI/ML", "Automation", "Cloud"],
+      impact: "High",
+      logo: "🤖"
     },
     {
       title: "Data Analyst",
       company: "Accenture (Micro-Internship)",
       date: "Nov 2023",
-      icon: "analytics",
+      icon: Target,
+      category: "analytics",
       color: "#8B5CF6",
+      gradient: "from-violet-500 to-purple-500",
       description: [
         "Conducted root-cause analysis and improved data quality across business units",
         "Created visual insights using dashboards to support strategic decisions"
-      ]
+      ],
+      skills: ["Data Analysis", "Root Cause", "Dashboards", "Strategy"],
+      impact: "Medium",
+      logo: "🎯"
     },
     {
       title: "Data Analyst",
       company: "IBM Skills Build (Micro-Internship)",
       date: "Nov 2023",
-      icon: "data",
+      icon: Database,
+      category: "data",
       color: "#0EA5E9",
+      gradient: "from-sky-500 to-blue-500",
       description: [
         "Utilized IBM Cognos and SPSS to analyze trends and patterns in data",
         "Delivered actionable recommendations based on analytics reports"
-      ]
+      ],
+      skills: ["IBM Cognos", "SPSS", "Analytics", "Recommendations"],
+      impact: "Medium",
+      logo: "💾"
     },
     {
       title: "Data Science Intern",
       company: "TATA",
       date: "Nov 2023",
-      icon: "science",
+      icon: Cpu,
+      category: "science",
       color: "#F59E0B",
+      gradient: "from-amber-500 to-orange-500",
       description: [
         "Performed advanced data processing on large datasets, enabling data-driven insights",
         "Developed algorithms to accelerate data retrieval, enhancing analytical precision"
-      ]
+      ],
+      skills: ["Data Processing", "Algorithms", "Large Datasets", "Analytics"],
+      impact: "High",
+      logo: "🔬"
     },
     {
       title: "AI-ML Intern",
       company: "AWS (Edu Skills)",
       date: "Sep 2023 - Nov 2023",
-      icon: "cloud",
+      icon: Cloud,
+      category: "cloud",
       color: "#10B981",
+      gradient: "from-emerald-500 to-green-500",
       description: [
         "Explored AI-driven analytics, researching transformative applications in machine learning",
         "Researched industry trends, aligning skills with career opportunities in data science"
-      ]
+      ],
+      skills: ["AWS", "AI Analytics", "Research", "ML"],
+      impact: "Medium",
+      logo: "☁️"
     }
   ];
+
+  const categories = [
+    { id: 'all', name: 'All Experience', icon: Globe, count: experiences.length },
+    { id: 'web', name: 'Web Development', icon: Code, count: experiences.filter(e => e.category === 'web').length },
+    { id: 'ai', name: 'AI/ML', icon: Brain, count: experiences.filter(e => e.category === 'ai').length },
+    { id: 'data', name: 'Data Science', icon: Database, count: experiences.filter(e => e.category === 'data').length },
+    { id: 'cloud', name: 'Cloud', icon: Cloud, count: experiences.filter(e => e.category === 'cloud').length }
+  ];
+
+  const filteredExperiences = selectedCategory === 'all' 
+    ? experiences 
+    : experiences.filter(exp => exp.category === selectedCategory);
 
   const timelineRef = useRef(null);
   const isInView = useInView(timelineRef, { once: false, amount: 0.2 });
@@ -122,21 +182,6 @@ const Experience = () => {
     }
   }, [isInView, controls]);
 
-  const getFloatingElements = (count) => {
-    const elements = [];
-    for (let i = 0; i < count; i++) {
-      elements.push({
-        x: Math.random() * 200 - 100,
-        y: Math.random() * 200 - 100,
-        size: Math.random() * 4 + 2,
-        delay: Math.random() * 3,
-        duration: Math.random() * 6 + 8,
-      });
-    }
-    return elements;
-  };
-
-  // Clean animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -148,157 +193,24 @@ const Experience = () => {
     }
   };
 
-  const lineVariants = {
-    hidden: { height: 0 },
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
     visible: {
-      height: "100%",
-      transition: {
-        duration: 1.5,
-        ease: "easeOut",
-      }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 40, 
-      scale: 0.95
-    },
-    visible: i => ({
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
         type: "spring",
         stiffness: 100,
         damping: 12,
-        delay: i * 0.15,
-      }
-    }),
-    hover: {
-      y: -8,
-      scale: 1.02,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 20
       }
     }
-  };
-
-  const nodeVariants = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: i => ({
-      scale: 1,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 15,
-        delay: 0.8 + i * 0.15
-      }
-    }),
-    hover: {
-      scale: 1.2,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10
-      }
-    }
-  };
-
-  const detailVariants = {
-    hidden: { opacity: 0, height: 0 },
-    visible: {
-      opacity: 1,
-      height: "auto",
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-        height: { duration: 0.4 }
-      }
-    },
-    exit: {
-      opacity: 0,
-      height: 0,
-      transition: {
-        duration: 0.3
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -15 },
-    visible: i => ({
-      opacity: 1,
-      x: 0,
-      transition: {
-        delay: i * 0.1
-      }
-    })
-  };
-
-  // Simple icon mapping
-  const iconMapping = {
-    web: Code,
-    frontend: Briefcase,
-    data: Database,
-    ai: Brain,
-    analytics: LineChart,
-    science: Database,
-    cloud: Cloud
   };
 
   return (
     <section id="experience" className="py-24 relative overflow-hidden bg-black">
-      {/* Subtle background elements */}
-      <div className="absolute inset-0 z-0">
-        {/* Simple gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/50 to-black" />
-        
-        {/* Floating particles */}
-        {getFloatingElements(15).map((element, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-white/10"
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: [0, 0.6, 0],
-              x: [element.x, element.x + 100],
-              y: [element.y, element.y - 100],
-            }}
-            transition={{
-              duration: element.duration,
-              delay: element.delay,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            }}
-            style={{
-              width: `${element.size}px`,
-              height: `${element.size}px`,
-              left: "50%",
-              top: "50%",
-            }}
-          />
-        ))}
-
-        {/* Simple decorative elements */}
-        <motion.div
-          className="absolute top-20 left-10 w-16 h-16 border border-white/10 rounded-full"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        />
-        <motion.div
-          className="absolute bottom-20 right-10 w-12 h-12 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg"
-          animate={{ 
-            rotate: [-10, 10, -10],
-            scale: [1, 1.05, 1]
-          }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
+      {/* Dark Background Gradient */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -310,32 +222,32 @@ const Experience = () => {
           className="max-w-6xl mx-auto"
         >
           {/* Header */}
-          <motion.div className="text-center mb-16">
+          <motion.div className="text-center mb-20">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 mb-6 text-sm font-medium"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 mb-6 text-sm font-medium"
             >
               <Sparkles className="w-4 h-4" />
               Professional Journey
             </motion.div>
 
             <motion.h2 
-              className="text-4xl md:text-6xl font-bold mb-6 text-white"
+              className="text-4xl md:text-6xl font-bold mb-6"
               initial={{ opacity: 0, y: -20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <span className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
                 Experience
               </span>
             </motion.h2>
 
             <motion.p
-              className="text-gray-400 mb-8 max-w-2xl mx-auto text-lg"
+              className="text-gray-400 mb-12 max-w-2xl mx-auto text-lg"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -343,6 +255,37 @@ const Experience = () => {
             >
               My professional journey through technology and development
             </motion.p>
+          </motion.div>
+
+          {/* Category Filter */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="flex flex-wrap justify-center gap-3 mb-16"
+          >
+            {categories.map((category) => (
+              <motion.button
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`
+                  flex items-center gap-2 px-4 py-2 rounded-full font-medium transition-all duration-300 text-sm
+                  ${selectedCategory === category.id
+                    ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/25'
+                    : 'bg-white/5 text-gray-400 hover:bg-white/10 border border-white/10'
+                  }
+                `}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <category.icon className="w-4 h-4" />
+                {category.name}
+                <span className="ml-1 px-2 py-0.5 rounded-full bg-white/10 text-xs">
+                  {category.count}
+                </span>
+              </motion.button>
+            ))}
           </motion.div>
 
           {/* Timeline */}
@@ -353,157 +296,152 @@ const Experience = () => {
             animate={controls}
             className="relative"
           >
-            {/* Timeline line */}
-            <motion.div
-              variants={lineVariants}
-              className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-blue-500 to-purple-500 z-0"
-            />
+            {/* Timeline Line */}
+            <div className="absolute left-8 md:left-1/2 md:transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500" />
 
-            {/* Experience items */}
-            <div className="relative z-10">
-              {experiences.map((exp, index) => {
-                const isLeftSide = index % 2 === 0;
-                const IconComponent = iconMapping[exp.icon] || Briefcase;
+            {/* Experience Items */}
+            <div className="space-y-12">
+              {filteredExperiences.map((exp, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  className={`relative flex items-start gap-8 ${
+                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                  }`}
+                >
+                  {/* Timeline Dot */}
+                  <div className="absolute left-6 md:left-1/2 md:transform md:-translate-x-1/2 top-8 w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full border-4 border-slate-900 z-10" />
 
-                return (
-                  <motion.div 
-                    key={index} 
-                    className="mb-16 relative"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                  >
-                    {/* Timeline node */}
+                  {/* Content Card */}
+                  <div className={`flex-1 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'}`}>
                     <motion.div
-                      variants={nodeVariants}
-                      custom={index}
-                      whileHover="hover"
-                      onHoverStart={() => setHoveredIndex(index)}
-                      onHoverEnd={() => setHoveredIndex(null)}
-                      onClick={() => setActiveIndex(activeIndex === index ? null : index)}
-                      className="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full z-20 cursor-pointer flex items-center justify-center border-2 border-gray-800"
-                      style={{
-                        background: `linear-gradient(135deg, ${exp.color}, ${exp.color}CC)`,
-                        boxShadow: hoveredIndex === index 
-                          ? `0 0 20px ${exp.color}60` 
-                          : `0 0 10px ${exp.color}40`,
-                      }}
+                      initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      className="group relative"
                     >
-                      <IconComponent className="w-5 h-5 text-white" />
-                    </motion.div>
-
-                    {/* Date */}
-                    <motion.div
-                      variants={cardVariants}
-                      custom={index}
-                      className={`absolute top-0 ${
-                        isLeftSide ? 'right-1/2 mr-16' : 'left-1/2 ml-16'
-                      } bg-gray-900/80 backdrop-blur-sm px-4 py-1.5 rounded-full text-sm font-medium z-10 border border-gray-700`}
-                    >
-                      <span className="flex items-center gap-2 text-gray-300">
-                        <Calendar className="w-4 h-4" style={{ color: exp.color }} />
-                        {exp.date}
-                      </span>
-                    </motion.div>
-
-                    {/* Experience card */}
-                    <motion.div
-                      layout
-                      variants={cardVariants}
-                      custom={index}
-                      whileHover="hover"
-                      onClick={() => setActiveIndex(activeIndex === index ? null : index)}
-                      className={`p-6 rounded-2xl border cursor-pointer backdrop-blur-sm ${
-                        isLeftSide ? 'mr-auto pr-8' : 'ml-auto pl-8'
-                      } w-full md:w-5/12 ${
-                        activeIndex === index 
-                          ? 'bg-gray-900/60 border-gray-600' 
-                          : 'bg-gray-900/40 border-gray-700'
-                      } hover:bg-gray-900/60 transition-all duration-300`}
-                    >
-                      {/* Card content */}
-                      <div className="flex items-start gap-4 relative z-10">
-                        <motion.div 
-                          className="p-3 rounded-xl flex items-center justify-center"
-                          style={{ 
-                            backgroundColor: `${exp.color}20`,
-                            border: `1px solid ${exp.color}40`
-                          }}
-                          whileHover={{ scale: 1.05 }}
-                          transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                        >
-                          <IconComponent className="w-6 h-6" style={{ color: exp.color }} />
-                        </motion.div>
-                        
-                        <div className="flex-1">
-                          <div className="flex justify-between items-start">
+                      {/* Card */}
+                      <div className="relative p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-blue-500/30 transition-all duration-300 hover:bg-white/10">
+                        {/* Header */}
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="flex items-center gap-4">
+                            <div className="text-3xl">{exp.logo}</div>
                             <div>
-                              <h3 className="text-xl font-bold text-white mb-1">
+                              <h3 className="text-xl font-bold text-white mb-1 group-hover:text-blue-300 transition-colors">
                                 {exp.title}
                               </h3>
                               <div className="flex items-center gap-2 text-gray-400">
                                 <Building2 className="w-4 h-4" />
-                                <p className="font-medium text-sm">{exp.company}</p>
+                                <p className="font-medium">{exp.company}</p>
                               </div>
                             </div>
-                            <motion.div
-                              animate={activeIndex === index ? { rotate: 90 } : { rotate: 0 }}
-                              transition={{ duration: 0.3 }}
-                              className="p-1.5 rounded-full bg-gray-800/50"
-                            >
-                              <ChevronRight 
-                                className="w-4 h-4 text-gray-400" 
-                              />
-                            </motion.div>
                           </div>
                           
-                          <AnimatePresence mode="wait">
-                            {activeIndex === index && (
-                              <motion.div
-                                variants={detailVariants}
-                                initial="hidden"
-                                animate="visible"
-                                exit="exit"
-                                className="mt-4 overflow-hidden"
-                              >
-                                <div className="space-y-3">
-                                  {exp.description.map((item, i) => (
-                                    <motion.div
-                                      key={i} 
-                                      variants={itemVariants}
-                                      custom={i}
-                                      className="flex items-start gap-3 text-gray-300"
-                                    >
-                                      <Award 
-                                        className="w-4 h-4 mt-0.5 flex-shrink-0" 
-                                        style={{ color: exp.color }} 
-                                      />
-                                      <span className="text-sm leading-relaxed">{item}</span>
-                                    </motion.div>
-                                  ))}
-                                </div>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
+                          {/* Date */}
+                          <div className="flex items-center gap-2 text-gray-400 text-sm">
+                            <Calendar className="w-4 h-4" />
+                            {exp.date}
+                          </div>
                         </div>
-                      </div>
-                      
-                      {/* Expand indicator */}
-                      {!(activeIndex === index) && (
-                        <motion.div
-                          className="absolute bottom-3 right-3 text-xs px-2 py-1 rounded-full bg-gray-800/60 text-gray-400"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
+
+                        {/* Skills */}
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {exp.skills.map((skill, i) => (
+                            <span
+                              key={i}
+                              className="px-3 py-1 rounded-full text-xs font-medium bg-blue-500/10 text-blue-300 border border-blue-500/20"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* Impact Badge */}
+                        <div className="flex items-center gap-2 mb-4">
+                          <div className={`
+                            w-2 h-2 rounded-full ${exp.impact === 'High' ? 'bg-green-400' : 'bg-yellow-400'}
+                          `} />
+                          <span className="text-xs text-gray-400">Impact: {exp.impact}</span>
+                        </div>
+
+                        {/* Expandable Description */}
+                        <AnimatePresence mode="wait">
+                          {activeIndex === index && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="space-y-3 pt-4 border-t border-white/10">
+                                {exp.description.map((item, i) => (
+                                  <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: i * 0.1 }}
+                                    className="flex items-start gap-3 text-gray-300"
+                                  >
+                                    <Award className="w-4 h-4 mt-0.5 flex-shrink-0 text-yellow-400" />
+                                    <span className="text-sm leading-relaxed">{item}</span>
+                                  </motion.div>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+
+                        {/* Expand Button */}
+                        <motion.button
+                          onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+                          className="absolute bottom-4 right-4 p-2 rounded-full bg-blue-500/20 hover:bg-blue-500/30 transition-all duration-300 border border-blue-500/30"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
                         >
-                          Click to expand
-                        </motion.div>
-                      )}
+                          <ChevronRight 
+                            className={`w-4 h-4 text-blue-300 transition-transform duration-300 ${activeIndex === index ? 'rotate-90' : ''}`}
+                          />
+                        </motion.button>
+                      </div>
+
+                      {/* Glow Effect */}
+                      <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm -z-10" />
                     </motion.div>
-                  </motion.div>
-                );
-              })}
+                  </div>
+                </motion.div>
+              ))}
             </div>
+          </motion.div>
+
+          {/* Stats Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6"
+          >
+            {[
+              { label: "Total Experience", value: "8+", icon: Briefcase, color: "text-blue-400" },
+              { label: "Companies", value: "6+", icon: Building2, color: "text-purple-400" },
+              { label: "Projects", value: "15+", icon: Rocket, color: "text-cyan-400" },
+              { label: "Skills", value: "20+", icon: Shield, color: "text-green-400" }
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 group"
+              >
+                <stat.icon className={`w-8 h-8 mx-auto mb-3 ${stat.color} group-hover:scale-110 transition-transform duration-300`} />
+                <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                <div className="text-sm text-gray-400">{stat.label}</div>
+              </motion.div>
+            ))}
           </motion.div>
         </motion.div>
       </div>
@@ -511,4 +449,4 @@ const Experience = () => {
   );
 };
 
-export default Experience;
+export default Experience; 
