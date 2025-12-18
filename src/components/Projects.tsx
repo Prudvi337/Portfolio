@@ -14,25 +14,25 @@ const Projects = () => {
   const projects = [
     {
       title: "Kidney Stone Detection",
-      description: "Developed an ML model for kidney stone detection, optimizing classification accuracy using Python, Scikit-Learn, and IBM Watson Studio",
+      description: "Built ML classification model using Scikit-Learn for kidney stone detection, deployed on IBM Watson Studio with model validation protocols.",
       image: "/kidney.jpg",
-      tags: ["Python", "Machine Learning", "IBM Watson"],
+      tags: ["Python", "Scikit-Learn", "Machine Learning"],
       github: "https://github.com/Prudvi337/kidney-stone-detection",
       featured: true,
       category: "ai",
       impact: "High",
-      tech: ["Python", "Scikit-Learn", "IBM Watson", "ML"],
+      tech: ["Python", "Scikit-Learn", "IBM Watson Studio", "Supervised Learning"],
       stats: { accuracy: "94%", users: "1000+", impact: "Medical" }
     },
     {
       title: "Water Quality Monitoring",
-      description: "Engineered AI-powered real-time water monitoring on IBM Cloud, streamlining data acquisition",
+      description: "Engineered real-time monitoring solution with AI-driven anomaly detection deployed on IBM Cloud.",
       image: "/water.jpg",
-      tags: ["Python", "IBM Cloud", "APIs"],
+      tags: ["Python", "IBM Cloud", "IoT"],
       github: "https://github.com/Prudvi337/water-quality-monitoring",
       category: "iot",
       impact: "Medium",
-      tech: ["Python", "IBM Cloud", "IoT", "Real-time"],
+      tech: ["Python", "IBM Cloud", "IoT", "Anomaly Detection"],
       stats: { accuracy: "98%", users: "500+", impact: "Environmental" }
     },
     {
@@ -48,26 +48,26 @@ const Projects = () => {
     },
     {
       title: "NEO Explorer",
-      description: "Interactive NEO tracking web app using NASA data, featuring 3D visualizations for engagement",
+      description: "Built interactive asteroid tracking app with real-time NASA API integration and 3D orbital visualizations using Three.js.",
       image: "/neo.png",
-      tags: ["JavaScript", "NASA API", "3D Graphics"],
+      tags: ["JavaScript", "NASA API", "Three.js"],
       github: "https://github.com/Prudvi337/neo-explorer",
       live: "https://www.neoexplorer.earth",
       featured: true,
       category: "web",
       impact: "High",
-      tech: ["JavaScript", "NASA API", "Three.js", "3D"],
+      tech: ["JavaScript", "NASA API", "Three.js", "React.js"],
       stats: { asteroids: "25000+", users: "5000+", impact: "Space" }
     },
     {
       title: "LearnByDoing",
-      description: "Project-based learning platform for tech enthusiasts with hands-on experience and proper guidance",
+      description: "Developed project-based learning platform with user authentication, project tracking, and mentor support system.",
       image: "/LBD.png",
-      tags: ["React.js", "Node.js", "MongoDB"],
+      tags: ["React.js", "Node.js", "Firebase"],
       github: "https://github.com/Prudvi337/LearnByDoing",
       category: "web",
       impact: "High",
-      tech: ["React.js", "Node.js", "MongoDB", "Full-stack"],
+      tech: ["React.js", "Node.js", "MongoDB", "Firebase"],
       stats: { courses: "50+", students: "10000+", impact: "Education" }
     }
   ];
@@ -117,8 +117,8 @@ const Projects = () => {
   ];
 
   const allProjects = [...projects, ...moreProjects];
-  const filteredProjects = selectedCategory === 'all' 
-    ? allProjects 
+  const filteredProjects = selectedCategory === 'all'
+    ? allProjects
     : allProjects.filter(project => project.category === selectedCategory);
 
   const nextProject = () => {
@@ -134,10 +134,10 @@ const Projects = () => {
     const cardRef = useRef(null);
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
-    
+
     const rotateX = useTransform(mouseY, [-300, 300], [15, -15]);
     const rotateY = useTransform(mouseX, [-300, 300], [-15, 15]);
-    
+
     const springConfig = { damping: 20, stiffness: 300 };
     const springRotateX = useSpring(rotateX, springConfig);
     const springRotateY = useSpring(rotateY, springConfig);
@@ -172,7 +172,7 @@ const Projects = () => {
         <div className="relative p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 hover:border-blue-500/40 transition-all duration-500 overflow-hidden">
           {/* Animated Background */}
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          
+
           {/* Floating Particles */}
           <div className="absolute inset-0 overflow-hidden">
             {[...Array(6)].map((_, i) => (
@@ -207,7 +207,7 @@ const Projects = () => {
               transition={{ duration: 0.5 }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            
+
             {/* Impact Badge */}
             <div className="absolute top-4 right-4">
               <div className={`
@@ -231,7 +231,7 @@ const Projects = () => {
             <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
               {project.title}
             </h3>
-            
+
             <p className="text-gray-300 text-sm mb-4 line-clamp-2">
               {project.description}
             </p>
@@ -315,7 +315,7 @@ const Projects = () => {
               My Work
             </motion.div>
 
-            <motion.h2 
+            <motion.h2
               className="text-4xl md:text-6xl font-bold mb-6"
               initial={{ opacity: 0, y: -20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -350,7 +350,7 @@ const Projects = () => {
                 Featured Showcase
               </span>
             </h3>
-            
+
             <div className="relative">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -375,7 +375,7 @@ const Projects = () => {
                           className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                        
+
                         {/* Floating Stats */}
                         <div className="absolute bottom-4 left-4 right-4">
                           <div className="grid grid-cols-3 gap-4">
@@ -449,17 +449,17 @@ const Projects = () => {
 
               {/* Navigation */}
               <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 flex gap-4">
-                <Button 
-                  variant="outline" 
-                  size="icon" 
+                <Button
+                  variant="outline"
+                  size="icon"
                   className="rounded-full bg-white/5 backdrop-blur-sm hover:bg-blue-500/20 border-blue-500/30 text-blue-300"
                   onClick={prevProject}
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </Button>
-                <Button 
-                  variant="outline" 
-                  size="icon" 
+                <Button
+                  variant="outline"
+                  size="icon"
                   className="rounded-full bg-white/5 backdrop-blur-sm hover:bg-blue-500/20 border-blue-500/30 text-blue-300"
                   onClick={nextProject}
                 >
@@ -469,10 +469,10 @@ const Projects = () => {
             </div>
           </motion.div>
           <h3 className="text-2xl font-bold text-center mb-12 text-white">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">
-                All Projects
-              </span>
-            </h3>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">
+              All Projects
+            </span>
+          </h3>
           {/* Category Filter */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -511,8 +511,8 @@ const Projects = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-           
-            
+
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProjects.map((project, index) => (
                 <motion.div
@@ -527,10 +527,10 @@ const Projects = () => {
               ))}
             </div>
           </motion.div>
-          
+
 
           {/* CTA Section */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -538,16 +538,16 @@ const Projects = () => {
             className="mt-24 text-center space-y-8"
           >
             {/* Inspirational Quote */}
-            <motion.blockquote 
+            <motion.blockquote
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
               className="max-w-4xl mx-auto text-xl md:text-3xl font-bold text-gray-300 leading-relaxed"
             >
               <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                "Every line of code is a step toward 
-                <span className="italic text-white"> innovation</span>, 
-                every project a journey into the 
+                "Every line of code is a step toward
+                <span className="italic text-white"> innovation</span>,
+                every project a journey into the
                 <span className="italic text-white"> future</span>."
               </span>
             </motion.blockquote>
@@ -556,8 +556,8 @@ const Projects = () => {
             <p className="text-gray-400 text-lg">Ready to bring your ideas to life?</p>
 
             {/* Contact Button */}
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:opacity-90 transition-all duration-300 shadow-lg shadow-purple-500/20 text-lg px-8 py-4"
               asChild
             >

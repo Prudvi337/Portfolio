@@ -1,14 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, useAnimation, useInView, AnimatePresence } from "framer-motion";
-import { 
-  Briefcase, 
-  ChevronRight, 
-  Calendar, 
-  Building2, 
-  Award, 
-  Code, 
-  Database,  
-  LineChart, 
+import {
+  Briefcase,
+  ChevronRight,
+  Calendar,
+  Building2,
+  Award,
+  Code,
+  Database,
+  LineChart,
   Brain,
   Cloud,
   Sparkles,
@@ -26,137 +26,59 @@ import {
 const Experience = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
-  
+
   const experiences = [
     {
-      title: "Full Stack Web Intern",
-      company: "Unified Mentor",
-      date: "Feb 15, 2025 – Apr 15, 2025",
+      title: "Software Development Engineer",
+      company: "DesignDeliverGrow",
+      date: "Jul 2025 – Present",
       icon: Code,
       category: "web",
       color: "#4F46E5",
       gradient: "from-indigo-500 to-purple-600",
       description: [
-        "Developing and integrating full-stack features using React, Node.js, and Firebase",
-        "Implementing secure authentication flows and scalable database schemas",
-        "Collaborating in Agile sprints to improve user experience and performance"
+        "Architected and developed full-stack applications using React.js, Node.js, and MongoDB in an agile environment",
+        "Implemented RESTful APIs with proper error handling, validation, and optimization for production deployment",
+        "Collaborated with distributed teams to deliver features on iterative sprints while maintaining code quality"
       ],
-      skills: ["React", "Node.js", "Firebase", "Agile"],
+      skills: ["React.js", "Node.js", "MongoDB", "REST APIs"],
       impact: "High",
-      logo: "🚀"
+      logo: "💻"
     },
     {
-      title: "Frontend Developer",
-      company: "Freelance/Self-Placed",
-      date: "Jan 2024 – Feb 2025",
-      icon: Zap,
-      category: "frontend",
+      title: "Web Developer Intern",
+      company: "Innobyte Services",
+      date: "Jun 2025 – Jul 2025",
+      icon: Globe,
+      category: "web",
       color: "#2563EB",
       gradient: "from-blue-500 to-cyan-500",
       description: [
-        "Built responsive and modular UI components using React.js and Tailwind CSS",
-        "Worked closely with clients to translate user requirements into functional interfaces",
-        "Optimized performance and deployed projects to cloud platforms for scalability"
+        "Built and deployed scalable web applications using React.js, Node.js, and MongoDB stack",
+        "Collaborated in an agile environment with distributed teams to deliver features in short sprint cycles",
+        "Worked with REST APIs and implemented authentication mechanisms for secure application access"
       ],
-      skills: ["React.js", "Tailwind CSS", "UI/UX", "Performance"],
+      skills: ["React.js", "Node.js", "MongoDB", "Authentication"],
       impact: "Medium",
-      logo: "⚡"
+      logo: "🌐"
     },
     {
-      title: "Power BI Intern",
-      company: "PWC",
-      date: "Aug 2024",
-      icon: LineChart,
-      category: "data",
+      title: "Full Stack Web Development Intern",
+      company: "Unified Mentor",
+      date: "Feb 2025 – Apr 2025",
+      icon: Rocket,
+      category: "web",
       color: "#EC4899",
       gradient: "from-pink-500 to-rose-500",
       description: [
-        "Built high-impact dashboards, enhancing data visualization for strategic decision-making",
-        "Identified executive-level gender disparity through analysis, driving policy recommendations"
+        "Engineered scalable web applications using React.js, Node.js, Express.js, and MongoDB",
+        "Implemented RESTful API endpoints with proper data validation and error handling",
+        "Enhanced user experience through responsive design and intuitive UI implementation",
+        "Debugged and resolved production issues, improving system reliability"
       ],
-      skills: ["Power BI", "Data Visualization", "Analytics", "Strategy"],
+      skills: ["React.js", "Node.js", "Express.js", "MongoDB"],
       impact: "High",
-      logo: "📊"
-    },
-    {
-      title: "AI-ML Intern",
-      company: "IBM Skills Build",
-      date: "Jun 2024 - Jul 2024",
-      icon: Brain,
-      category: "ai",
-      color: "#06B6D4",
-      gradient: "from-cyan-500 to-blue-500",
-      description: [
-        "Engineered AI automation workflows with IBM Watson, boosting operational efficiency",
-        "Optimized cloud deployment for scalability, improving service reliability"
-      ],
-      skills: ["IBM Watson", "AI/ML", "Automation", "Cloud"],
-      impact: "High",
-      logo: "🤖"
-    },
-    {
-      title: "Data Analyst",
-      company: "Accenture (Micro-Internship)",
-      date: "Nov 2023",
-      icon: Target,
-      category: "analytics",
-      color: "#8B5CF6",
-      gradient: "from-violet-500 to-purple-500",
-      description: [
-        "Conducted root-cause analysis and improved data quality across business units",
-        "Created visual insights using dashboards to support strategic decisions"
-      ],
-      skills: ["Data Analysis", "Root Cause", "Dashboards", "Strategy"],
-      impact: "Medium",
-      logo: "🎯"
-    },
-    {
-      title: "Data Analyst",
-      company: "IBM Skills Build (Micro-Internship)",
-      date: "Nov 2023",
-      icon: Database,
-      category: "data",
-      color: "#0EA5E9",
-      gradient: "from-sky-500 to-blue-500",
-      description: [
-        "Utilized IBM Cognos and SPSS to analyze trends and patterns in data",
-        "Delivered actionable recommendations based on analytics reports"
-      ],
-      skills: ["IBM Cognos", "SPSS", "Analytics", "Recommendations"],
-      impact: "Medium",
-      logo: "💾"
-    },
-    {
-      title: "Data Science Intern",
-      company: "TATA",
-      date: "Nov 2023",
-      icon: Cpu,
-      category: "science",
-      color: "#F59E0B",
-      gradient: "from-amber-500 to-orange-500",
-      description: [
-        "Performed advanced data processing on large datasets, enabling data-driven insights",
-        "Developed algorithms to accelerate data retrieval, enhancing analytical precision"
-      ],
-      skills: ["Data Processing", "Algorithms", "Large Datasets", "Analytics"],
-      impact: "High",
-      logo: "🔬"
-    },
-    {
-      title: "AI-ML Intern",
-      company: "AWS (Edu Skills)",
-      date: "Sep 2023 - Nov 2023",
-      icon: Cloud,
-      category: "cloud",
-      color: "#10B981",
-      gradient: "from-emerald-500 to-green-500",
-      description: [
-        "Explored AI-driven analytics, researching transformative applications in machine learning",
-        "Researched industry trends, aligning skills with career opportunities in data science"
-      ],
-      skills: ["AWS", "AI Analytics", "Research", "ML"],
-      impact: "Medium",
-      logo: "☁️"
+      logo: "🚀"
     }
   ];
 
@@ -168,8 +90,8 @@ const Experience = () => {
     { id: 'cloud', name: 'Cloud', icon: Cloud, count: experiences.filter(e => e.category === 'cloud').length }
   ];
 
-  const filteredExperiences = selectedCategory === 'all' 
-    ? experiences 
+  const filteredExperiences = selectedCategory === 'all'
+    ? experiences
     : experiences.filter(exp => exp.category === selectedCategory);
 
   const timelineRef = useRef(null);
@@ -234,7 +156,7 @@ const Experience = () => {
               Professional Journey
             </motion.div>
 
-            <motion.h2 
+            <motion.h2
               className="text-4xl md:text-6xl font-bold mb-6"
               initial={{ opacity: 0, y: -20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -305,9 +227,8 @@ const Experience = () => {
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  className={`relative flex items-start gap-8 ${
-                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                  }`}
+                  className={`relative flex items-start gap-8 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                    }`}
                 >
                   {/* Timeline Dot */}
                   <div className="absolute left-6 md:left-1/2 md:transform md:-translate-x-1/2 top-8 w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full border-4 border-slate-900 z-10" />
@@ -337,7 +258,7 @@ const Experience = () => {
                               </div>
                             </div>
                           </div>
-                          
+
                           {/* Date */}
                           <div className="flex items-center gap-2 text-gray-400 text-sm">
                             <Calendar className="w-4 h-4" />
@@ -400,7 +321,7 @@ const Experience = () => {
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.95 }}
                         >
-                          <ChevronRight 
+                          <ChevronRight
                             className={`w-4 h-4 text-blue-300 transition-transform duration-300 ${activeIndex === index ? 'rotate-90' : ''}`}
                           />
                         </motion.button>
@@ -424,9 +345,9 @@ const Experience = () => {
             className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6"
           >
             {[
-              { label: "Total Experience", value: "8+", icon: Briefcase, color: "text-blue-400" },
-              { label: "Companies", value: "6+", icon: Building2, color: "text-purple-400" },
-              { label: "Projects", value: "15+", icon: Rocket, color: "text-cyan-400" },
+              { label: "Total Experience", value: "1 Year", icon: Briefcase, color: "text-blue-400" },
+              { label: "Companies", value: "3", icon: Building2, color: "text-purple-400" },
+              { label: "Projects", value: "8+", icon: Rocket, color: "text-cyan-400" },
               { label: "Skills", value: "20+", icon: Shield, color: "text-green-400" }
             ].map((stat, index) => (
               <motion.div
